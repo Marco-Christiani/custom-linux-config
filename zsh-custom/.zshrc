@@ -39,7 +39,8 @@ COMPLETION_WAITING_DOTS="true"
 # Set personal aliases, overriding those provided by oh-my-zsh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-
+alias pip="pip3
+"
 # Uncomment the following line to use hyphen-insensitive completion.
 # Case-sensitive completion must be off. _ and - will be interchangeable.
 # HYPHEN_INSENSITIVE="true"
