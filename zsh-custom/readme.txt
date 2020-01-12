@@ -10,4 +10,5 @@ ln -s /path/to/custom-linux-config/zsh-custom/.zshrc .zshrc
 # If its not working, check ZSH and ZSH_CUSTOM env path in .zshrc
 # * need to write an install script
 # Need to add support for python venv, breaks bash prompt, aliases
+
 # Add comment generator script
