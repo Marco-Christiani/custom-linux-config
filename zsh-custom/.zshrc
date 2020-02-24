@@ -21,10 +21,8 @@ plugins=(git)
 source $ZSH/oh-my-zsh.sh
 
 # Display welcome screen ------------------------------------------------------------------------
-figlet -w `tput cols` `date '+%A %W %Y'`
+figlet -w `tput cols` `date '+%b %d %Y'`
 neofetch
-
-
 
 # Preferred editor for local and remote sessions
 if [[ -n $SSH_CONNECTION ]]; then
@@ -32,15 +30,19 @@ if [[ -n $SSH_CONNECTION ]]; then
 else
   export EDITOR='subl'
 fi
+local pathtome="$(dirname $(readlink .zshrc))"
+source $pathtome/functions.sh # Load custom functions (follow ~/.zshrc symlink to wherever this file is)
 
 # Uncomment the following line to display red dots whilst waiting for completion.
 COMPLETION_WAITING_DOTS="true"
 
-# Set personal aliases, overriding those provided by oh-my-zsh
+# Custom Aliases ------------------------------------------------------------------------
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-alias pip="pip3
-"
+alias hg="history | grep"
+alias grep='grep -B 1 -A 5 --color=auto' # Highlight match, show 1 precending and 5 succeeding lines surrounding match
+
+
 # Uncomment the following line to use hyphen-insensitive completion.
 # Case-sensitive completion must be off. _ and - will be interchangeable.
 # HYPHEN_INSENSITIVE="true"
@@ -49,21 +51,4 @@ alias pip="pip3
 # ENABLE_CORRECTION="true"
 
 # export MANPATH="/usr/local/man:$MANPATH"
-# added by Anaconda3 2019.07 installer
-# >>> conda init >>>
-# !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$(CONDA_REPORT_ERRORS=false '/Users/mchris/anaconda3/bin/conda' shell.bash hook 2> /dev/null)"
-if [ $? -eq 0 ]; then
-    \eval "$__conda_setup"
-else
-    if [ -f "/Users/mchris/anaconda3/etc/profile.d/conda.sh" ]; then
-        . "/Users/mchris/anaconda3/etc/profile.d/conda.sh"
-        CONDA_CHANGEPS1=false conda activate base
-    else
-        \export PATH="/Users/mchris/anaconda3/bin:$PATH"
-    fi
-fi
-unset __conda_setup
-# <<< conda init <<<
-conda deactivate
 

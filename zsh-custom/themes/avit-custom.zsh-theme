@@ -1,6 +1,6 @@
 # My Custom Avit Zsh Theme
 
-PROMPT='┌───[$(_user_host)${_current_dir}] $(git_prompt_info) $(_ruby_version)
+PROMPT='┌───[$(_user_host)${_current_dir}] $(virtualenv_prompt_info) $(git_prompt_info) $(_ruby_version)
 └──%{$resetcolor%}'
 
 PROMPT2='%{$fg[$CARETCOLOR]%}❰%{$reset_color%} '
@@ -10,6 +10,14 @@ RPROMPT='$(_vi_status)%{$(echotc UP 1)%}$(_git_time_since_commit) $(git_prompt_s
 local _current_dir="%{$fg_bold[blue]%}%5~%{$reset_color%}"
 local _return_status="%{$fg_bold[red]%}%(?..⍉)%{$reset_color%}"
 local _hist_no="%{$fg[grey]%}%h%{$reset_color%}"
+
+function virtualenv_prompt_info(){
+  [[ -n ${VIRTUAL_ENV} ]] || return
+  echo "${ZSH_THEME_VIRTUALENV_PREFIX:=[}${VIRTUAL_ENV:t}${ZSH_THEME_VIRTUALENV_SUFFIX:=]}"
+}
+
+# disables prompt mangling in virtual_env/bin/activate
+export VIRTUAL_ENV_DISABLE_PROMPT=1
 
 function _current_dir() {
   local _max_pwd_length="80"
