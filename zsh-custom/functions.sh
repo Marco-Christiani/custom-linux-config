@@ -1,8 +1,10 @@
 #!/bin/bash
+CHECK_MARK="\033[0;32m\xE2\x9C\x94\033[0m"
+CLR_RT='\033[0K' # Clear everything to right of cursor
+
 # This is a general-purpose function to ask Yes/No questions in Bash, either
 # with or without a default answer. It keeps repeating the question until it
 # gets a valid answer.
-
 ask() {
     # https://djm.me/ask
     local prompt default reply
@@ -40,34 +42,7 @@ ask() {
     done
 }
 
-function loading_spinner(){
-    # Gets pid of last call, starts spinning until that process ends
-    # Requires suppression of command output
-    pid=$1 # Process Id of the previous running command
-    spin='-\|/'
-    i=0
 
-    while kill -0 $pid 2>/dev/null
-    do
-      i=$(( (i+1) %4 ))
-      printf "${spin:$i:1}" 
-      sleep .1
-      printf "\033[1D" # Move cursor back 1
-    done
-}
-
-function start_spinner(){
-    # Does not require suppression of output
-    spin="-\|/"
-    i=0
-    while :
-    do
-      i=$(( (i+1) %4 ))
-      printf "${spin:$i:1}" 
-      sleep .1
-      printf "\033[1D" # Move cursor back 1
-    done
-}
 function cd() { # Automatically ls after cd
     new_directory="$*";
     if [ $# -eq 0 ]; then 
@@ -81,17 +56,31 @@ function sflag() { # Search man entry for flag
 
 # Update homebrew package index, then upgrade all packages and apps (cask)
 function update(){
-    printf "Updating Homebrew package index...\n"
-    # read<<( brew update & echo $! )
-    # loading_spinner $REPLY # Spinner with output suppression
-    echo `brew update`
+    # printf  "\n\033[4mUpdating:\033[0m\n"
+    printf "\nUpdating Homebrew package index\n"
+    
+    output=`brew update`
 
-    printf "Querying upgradable packages...\n"
-    echo `brew outdated && brew cask outdated`
+    printf "\\r${CLR_RT}${CHECK_MARK} Homebrew package index updated:\n"
+    printf $output
+    printf "\n"
+
+    printf "\nQuerying upgradable packages"
+    output=`brew outdated && brew cask outdated 2>&1`
+    output=`echo $output| sed 's/^/  /'`
+    printf "\\r${CHECK_MARK} Queried upgradable packages"
+    
+    printf "\nThe following packages can be upgraded:\n"
+    printf "${output}" 
+    printf "\n"
 
     if ask "Continue with upgrades?"; then
-    echo `brew upgrade && brew cask upgrade`
+        printf "\n\033[32mUpgrading packages\033[39m\n\n"
+        brew upgrade && brew cask upgrade
+        printf "\n"
     else
-        echo "No"
+        printf "Exiting without upgrading.\n"
     fi
+
 }
+
