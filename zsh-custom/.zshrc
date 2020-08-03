@@ -1,6 +1,7 @@
 # export PYTHONPATH=/usr/local/bin/python3 # python3 as default python version DOESNT WORK
 export PATH=$PATH:$HOME/Library/Python/3.8/bin # add python 3.8 to path
 export GPG_TTY=$(tty) # Add GPG stuff for git commit signing to work
+export PATH=$PATH:$GPG_TTY} # GPG
 
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
