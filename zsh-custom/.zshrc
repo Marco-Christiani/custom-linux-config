@@ -1,4 +1,6 @@
-# export PATH=$HOME/bin:/usr/local/bin:$PATH
+# export PYTHONPATH=/usr/local/bin/python3 # python3 as default python version DOESNT WORK
+export PATH=$PATH:$HOME/Library/Python/3.8/bin # add python 3.8 to path
+export GPG_TTY=$(tty) # Add GPG stuff for git commit signing to work
 
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
@@ -30,7 +32,7 @@ if [[ -n $SSH_CONNECTION ]]; then
 else
   export EDITOR='subl'
 fi
-local pathtome="$(dirname $(readlink .zshrc))"
+local pathtome="$(dirname $(readlink ~/.zshrc))"
 source $pathtome/functions.sh # Load custom functions (follow ~/.zshrc symlink to wherever this file is)
 
 # Uncomment the following line to display red dots whilst waiting for completion.
@@ -40,9 +42,9 @@ COMPLETION_WAITING_DOTS="true"
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 alias hg="history | grep"
-alias grep='grep -B 1 -A 5 --color=auto' # Highlight match, show 1 precending and 5 succeeding lines surrounding match
-
-
+alias gf="grep -B 1 -A 5 --color=auto" # Grep files. Highlight match, show 1 precending and 5 succeeding lines surrounding match
+alias comgen="python3 ~/Documents/Programming_Personal/PrettyComments/comgen.py" # My pretty-comment generator
+alias ls="ll -Fpl"
 # Uncomment the following line to use hyphen-insensitive completion.
 # Case-sensitive completion must be off. _ and - will be interchangeable.
 # HYPHEN_INSENSITIVE="true"
@@ -51,4 +53,7 @@ alias grep='grep -B 1 -A 5 --color=auto' # Highlight match, show 1 precending an
 # ENABLE_CORRECTION="true"
 
 # export MANPATH="/usr/local/man:$MANPATH"
+
+
+test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
