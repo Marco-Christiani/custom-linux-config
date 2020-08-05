@@ -67,7 +67,7 @@ function update(){
 
     printf "\nQuerying upgradable packages"
     output=`brew outdated && brew cask outdated 2>&1`
-    output=`echo $output| sed 's/^/  /'`
+    # output=`echo $output| sed 's/^/  /'` # Gets rid of version number, idky I did that lol
     printf "\\r${CHECK_MARK} Queried upgradable packages"
     
     printf "\nThe following packages can be upgraded:\n"

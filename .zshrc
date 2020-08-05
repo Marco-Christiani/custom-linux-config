@@ -1,12 +1,12 @@
 # export PYTHONPATH=/usr/local/bin/python3 # python3 as default python version DOESNT WORK
 export PATH=$PATH:$HOME/Library/Python/3.8/bin # add python 3.8 to path
 export GPG_TTY=$(tty) # Add GPG stuff for git commit signing to work
-export PATH=$PATH:$GPG_TTY} # GPG
+export PATH=$PATH:$GPG_TTY # GPG
 
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
 
-ZSH_CUSTOM=$HOME/Documents/Github/custom-linux-config/zsh-custom
+ZSH_CUSTOM=$HOME/Documents/Github/custom-linux-config
 ZSH_THEME="avit-custom"
 
 # Uncomment the following line if you want to disable marking untracked files
@@ -44,17 +44,20 @@ COMPLETION_WAITING_DOTS="true"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 alias hg="history | grep"
 alias gf="grep -B 1 -A 5 --color=auto" # Grep files. Highlight match, show 1 precending and 5 succeeding lines surrounding match
-alias comgen="python3 ~/Documents/Programming_Personal/PrettyComments/comgen.py" # My pretty-comment generator
-alias ls="ll -Fpl"
+
+alias ls="ls -GFl" # G: colorized (set in theme file), F: symbols for file types
 # Uncomment the following line to use hyphen-insensitive completion.
 # Case-sensitive completion must be off. _ and - will be interchangeable.
 # HYPHEN_INSENSITIVE="true"
 
 # Uncomment the following line to enable command auto-correction.
-# ENABLE_CORRECTION="true"
+ENABLE_CORRECTION="true"
 
 # export MANPATH="/usr/local/man:$MANPATH"
 
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
+# Custom tools, aliased instead of symlinked because it's easier to keep track of them this way
+alias comgen="python3 $pathtome/comgen.py" # My pretty-comment generator
+alias check_for_homebrew_updates="python3 $pathtome/update.py" # My homebrew "outdated" notifier
