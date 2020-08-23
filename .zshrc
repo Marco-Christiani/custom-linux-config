@@ -25,7 +25,7 @@ source $ZSH/oh-my-zsh.sh
 
 # Display welcome screen ------------------------------------------------------------------------
 figlet -w `tput cols` `date '+%b %d %Y'`
-neofetch
+# neofetch
 
 # Preferred editor for local and remote sessions
 if [[ -n $SSH_CONNECTION ]]; then
@@ -61,3 +61,9 @@ test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell
 # Custom tools, aliased instead of symlinked because it's easier to keep track of them this way
 alias comgen="python3 $pathtome/comgen.py" # My pretty-comment generator
 alias check_for_homebrew_updates="python3 $pathtome/update.py" # My homebrew "outdated" notifier
+
+# zsh: Place this in .zshrc after "source /Users/georgen/.iterm2_shell_integration.zsh".
+iterm2_print_user_vars() {
+  iterm2_set_user_var dateStr "$(date +"%a %m/%d")"
+}
+
