@@ -60,7 +60,10 @@ test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell
 
 # Custom tools, aliased instead of symlinked because it's easier to keep track of them this way
 alias comgen="python3 $pathtome/comgen.py" # My pretty-comment generator
-alias check_for_homebrew_updates="python3 $pathtome/update.py" # My homebrew "outdated" notifier
+alias check_for_homebrew_updates="python3 $pathtome/check_homebrew_updates.py" # My homebrew "outdated" notifier
+alias update="python3 $pathtome/update_homebrew_pkgs.py" # Updates packages and casks
+
+
 
 # zsh: Place this in .zshrc after "source /Users/georgen/.iterm2_shell_integration.zsh".
 iterm2_print_user_vars() {
